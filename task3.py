@@ -32,10 +32,10 @@ def print_tree(path: Path, prefix: str = ""):
 
 def main():
     if len(sys.argv) < 2:
-        print(f"{Fore.YELLOW}Usage: python task3.py <directory_path>{Style.RESET_ALL}")
-        sys.exit(1)
+        path_arg = "."
+    else:
+        path_arg = sys.argv[1]
         
-    path_arg = sys.argv[1]
     path = Path(path_arg).resolve()
     
     if not path.exists():

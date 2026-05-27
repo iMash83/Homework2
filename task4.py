@@ -44,9 +44,21 @@ def show_all(contacts):
         result.append(f"{name}: {phone}")
     return "\n".join(result)
 
+def show_help():
+    return (
+        "Available commands:\n"
+        "  help                    - show this help message\n"
+        "  hello                   - greet the bot\n"
+        "  add [username] [phone]  - add a new contact\n"
+        "  change [username] [phone]- update an existing contact's phone\n"
+        "  phone [username]        - show the phone number of a contact\n"
+        "  all                     - show all saved contacts\n"
+        "  exit / close            - exit the assistant bot"
+    )
+
 def main():
     contacts = {}
-    print("Welcome to the assistant bot!")
+    print("Welcome to the assistant bot! (Type 'help' to see available commands)")
     
     while True:
         try:
@@ -63,6 +75,8 @@ def main():
         if command in ["close", "exit"]:
             print("Good bye!")
             break
+        elif command == "help":
+            print(show_help())
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
