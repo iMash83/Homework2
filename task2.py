@@ -1,27 +1,16 @@
 from pathlib import Path
 
 def get_cats_info(path: str) -> list[dict[str, str]]:
-    """
-    Reads a file containing cat entries and returns a list of dictionaries with cat details.
-    
-    Args:
-        path (str): Path to the text file containing cat information.
-        
-    Returns:
-        list[dict[str, str]]: A list of dictionaries, each containing "id", "name", and "age".
-                              Returns an empty list if the file is missing, empty, or corrupted.
-    """
     cats_info = []
     
     try:
         file_path = Path(path)
         
-        # Open file using context manager and specify UTF-8 encoding
         with open(file_path, "r", encoding="utf-8") as file:
             for line_num, line in enumerate(file, 1):
                 line = line.strip()
                 if not line:
-                    continue  # Skip empty lines
+                    continue
                 
                 try:
                     parts = line.split(",")
@@ -52,7 +41,6 @@ def get_cats_info(path: str) -> list[dict[str, str]]:
 
 
 if __name__ == "__main__":
-    # Quick self-test/example
     test_file_path = Path("cats_example.txt")
     test_content = (
         "60b90c1c13067a15887e1ae1,Tayson,3\n"
@@ -67,7 +55,6 @@ if __name__ == "__main__":
         cats_info = get_cats_info(str(test_file_path))
         print(cats_info)
         
-        # Clean up test file
         test_file_path.unlink(missing_ok=True)
     except Exception as e:
         print(f"Error running self-test: {e}")

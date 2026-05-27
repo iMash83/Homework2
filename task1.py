@@ -1,28 +1,16 @@
 from pathlib import Path
 
 def total_salary(path: str) -> tuple[float, float] | tuple[int, int]:
-    """
-    Analyzes the salary file and returns the total and average salary of all developers.
-    
-    Args:
-        path (str): Path to the text file containing developer salaries.
-        
-    Returns:
-        tuple[int | float, int | float]: A tuple containing (total_salary, average_salary).
-                                         Returns (0, 0) if the file is missing, empty, or corrupted.
-    """
     total = 0
     count = 0
     
     try:
-        file_path = Path(path)
-        
-        # Open file using context manager and specify UTF-8 encoding
+        file_path = Path(path)   
         with open(file_path, "r", encoding="utf-8") as file:
             for line_num, line in enumerate(file, 1):
                 line = line.strip()
                 if not line:
-                    continue  # Skip empty lines
+                    continue
                 
                 try:
                     parts = line.split(",")
@@ -30,7 +18,6 @@ def total_salary(path: str) -> tuple[float, float] | tuple[int, int]:
                         raise ValueError(f"Line must contain exactly one comma separating name and salary.")
                     
                     name, salary_str = parts
-                    # Try parsing as int, fallback to float if it contains decimals
                     try:
                         salary = int(salary_str.strip())
                     except ValueError:
@@ -56,7 +43,6 @@ def total_salary(path: str) -> tuple[float, float] | tuple[int, int]:
         
     average = total / count
     
-    # If the total and average are whole numbers, return them as integers to match expected format
     if isinstance(total, int) and total % count == 0:
         return int(total), int(average)
         
@@ -64,7 +50,6 @@ def total_salary(path: str) -> tuple[float, float] | tuple[int, int]:
 
 
 if __name__ == "__main__":
-    # Quick self-test/example
     test_file_path = Path("salaries_example.txt")
     test_content = (
         "Alex Korp,3000\n"
@@ -77,7 +62,6 @@ if __name__ == "__main__":
         total, average = total_salary(str(test_file_path))
         print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
         
-        # Clean up test file
         test_file_path.unlink(missing_ok=True)
     except Exception as e:
         print(f"Error running self-test: {e}")

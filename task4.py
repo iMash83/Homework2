@@ -1,8 +1,4 @@
 def parse_input(user_input):
-    """
-    Parses user input into a command and arguments.
-    Handles empty inputs gracefully to prevent unpacking errors.
-    """
     parts = user_input.split()
     if not parts:
         return "", []
@@ -11,9 +7,6 @@ def parse_input(user_input):
     return cmd, args
 
 def add_contact(args, contacts):
-    """
-    Adds a new contact to the contacts dictionary.
-    """
     try:
         name, phone = args
         contacts[name] = phone
@@ -22,9 +15,6 @@ def add_contact(args, contacts):
         return "Error: Please specify both username and phone. Usage: add [username] [phone]"
 
 def change_contact(args, contacts):
-    """
-    Changes the phone number for an existing contact.
-    """
     try:
         name, phone = args
         if name in contacts:
@@ -36,9 +26,6 @@ def change_contact(args, contacts):
         return "Error: Please specify both username and phone. Usage: change [username] [phone]"
 
 def show_phone(args, contacts):
-    """
-    Displays the phone number for a specified contact.
-    """
     try:
         name = args[0]
         if name in contacts:
@@ -49,9 +36,6 @@ def show_phone(args, contacts):
         return "Error: Please specify username. Usage: phone [username]"
 
 def show_all(contacts):
-    """
-    Returns a formatted string containing all saved contacts.
-    """
     if not contacts:
         return "No contacts found."
     
